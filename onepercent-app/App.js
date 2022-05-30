@@ -1,28 +1,17 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button } from "react-native";
-const axios = require("axios");
-import { SOME_STRING } from "@env";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+const Tab = createBottomTabNavigator();
+import Checkin from "./pages/Checkin";
+import Statusbar from "./components/Statusbar";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Text>This is some more text!</Text>
-      <Button onPress={sayHello} title="Click me"></Button>
-      <StatusBar style="dark" />
-    </View>
+    <NavigationContainer theme={{ colors: { background: "#fff" } }}>
+      <Statusbar backgroundColor={"#000"}></Statusbar>
+      <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Screen name="Checkin" component={Checkin} />
+        <Tab.Screen name="Other" component={Checkin} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
-function sayHello() {
-  console.log(SOME_STRING);
 }
